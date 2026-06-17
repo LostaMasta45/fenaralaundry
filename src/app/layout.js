@@ -1,5 +1,6 @@
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "../components/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,9 +19,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id" className="scroll-smooth">
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-slate-50 text-slate-800`}>
-        {children}
+    <html lang="id" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
